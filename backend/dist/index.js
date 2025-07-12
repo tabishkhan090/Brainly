@@ -59,9 +59,6 @@ app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
             message: "Error in inputs"
         });
     }
-    res.status(500).json({
-        message: "Server error"
-    });
 }));
 app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
@@ -75,6 +72,8 @@ app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
             res.status(403).json({
                 message: "Wrong email password"
             });
+            console.log("hi");
+            // return;
         }
         const token = jsonwebtoken_1.default.sign({ id: user._id }, config_1.JWT_USER_PASSWORD);
         res.status(200).json({
@@ -82,7 +81,7 @@ app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
     else {
-        res.json({
+        res.status(404).json({
             message: "User not found"
         });
     }

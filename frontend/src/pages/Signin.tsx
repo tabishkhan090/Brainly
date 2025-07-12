@@ -2,16 +2,25 @@ import { useRef } from "react";
 import { Buttons } from "../components/Button";
 import { Input } from "../components/input";
 import { BACKEND_URL } from "../config";
+import axios from "axios";
 
 export function Signin() {
     const usernameRef = useRef<any>("");
     const passwordRef = useRef<any>("");
 
-    async function signin() {
+    async function signin(){
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
-        
-        await axios.post(BACKEND_URL +" "+ '${}' )
+
+        const response = await axios.post(BACKEND_URL + "/api/v1/signin",{
+            username,
+            password
+        })
+        // @ts-ignore
+        const jwt = response.data.token;
+        localStorage.setItem("token", jwt);
+
+        alert("you are successfully signed up");
     }
 
     return <div className="h-screen w-screen bg-gray-200 flex justify-center items-center">
@@ -21,7 +30,7 @@ export function Signin() {
                 <Input placeholder="Password" refrance={passwordRef}/>
             </div>
             <div className="p-2">
-                <Buttons onClick={signup} variant="ternary" title="Signin"/>
+                <Buttons onClick={signin} variant="ternary" title="Signin"/>
             </div>
         </div>
     </div>

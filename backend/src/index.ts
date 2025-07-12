@@ -46,12 +46,9 @@ app.post("/api/v1/signup", async (req, res) => {
                 message: "Error in inputs"
         })
     }
-    res.status(500).json({
-                message: "Server error"
-        })
 })
 
-app.post("/api/v1/signin", async (req,res) => {
+app.post("/api/v1/signin", async (req, res) => {
     const {username, password} = req.body;
     const user = await UserModel.findOne({
         username
@@ -61,17 +58,19 @@ app.post("/api/v1/signin", async (req,res) => {
         const match = await bcrypt.compare(password,user.password);
         if(!match){
             res.status(403).json({
-            message: "Wrong email password"
-        })
-    }
-    const token = jwt.sign({id: user._id},JWT_USER_PASSWORD);
-    res.status(200).json({
-        token: token
-    })
-    }else{
-        res.json({
+                message: "Wrong email password"
+            });
+            console.log("hi")
+            // return;
+        }
+        const token = jwt.sign({id: user._id},JWT_USER_PASSWORD);
+        res.status(200).json({
+            token: token
+        });
+    } else {
+        res.status(404).json({
             message: "User not found"
-        })
+        });
     }
 })
 
