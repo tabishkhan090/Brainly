@@ -11,7 +11,7 @@ import { getDate } from '../utlits'
 import { Sidebar } from '../components/Sidebar'
 
 export function Dashboard() {
-const [modalopen, setmodalopen] = useState(false);
+const [modalopen, setmodalopen] = useState(true);
 
 return <div>
         <Sidebar/>

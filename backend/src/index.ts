@@ -75,15 +75,17 @@ app.post("/api/v1/signin", async (req, res) => {
 })
 
 app.post("/api/v1/content", userMiddleware, async (req, res) => {
-    const { type, link, title } = req.body;
+    const { type, link, title, document } = req.body;
     await ContentModel.create({
         type: type,
         link: link,
         title: title,
+        document: document,
         tags: [],
         // @ts-ignore
         userId: req.userId
     })
+
     res.json({
         message: "Content added"
     })

@@ -3,8 +3,10 @@ import { Buttons } from "../components/Button";
 import { Input } from "../components/input";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function Signin() {
+    const navigate = useNavigate();
     const usernameRef = useRef<any>("");
     const passwordRef = useRef<any>("");
 
@@ -19,7 +21,7 @@ export function Signin() {
         // @ts-ignore
         const jwt = response.data.token;
         localStorage.setItem("token", jwt);
-
+        navigate("/dashboard")
         alert("you are successfully signed up");
     }
 

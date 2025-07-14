@@ -15,7 +15,7 @@ interface CardInterface {
 export function Cards(props: CardInterface){
     return <div className="flex flex-col border w-90 border-gray-200 bg-white p-4 rounded-xl h-120 ">
         <div className="flex flex-row justify-between text-xl">
-            <div className="flex">
+            <div className="flex items-center">
                 <div className="pr-2 ">
                     {props.starticon}
                 </div>
